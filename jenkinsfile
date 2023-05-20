@@ -16,7 +16,7 @@ pipeline{
         stage("deploy"){
             steps{
                 sh "pwd"
-                sh "cp /home/ec2-user/workspace/r/my-sample-website/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
+                sh "cp /home/ec2-user/workspace/r/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
             }
         }
     }
