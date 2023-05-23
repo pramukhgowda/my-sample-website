@@ -1,22 +1,15 @@
 pipeline{
-    agent{label "web3cpull"}
+    agent{label 'tomcat'}
     stages{
-        stage('clone/pull'){
+        stage('cloneorpull'){
             steps{
-                sh "pwd"
-                sh "git pull https://github.com/pramukhgowda/my-sample-website.git"
+                git url: 'https://github.com/pramukhgowda/my-sample-website.git', branch: 'master'
             }
         }
-        stage("maven"){
+        stage('build'){
             steps{
                 sh "pwd"
                 sh "mvn clean install"
-            }
-        }
-        stage("deploy"){
-            steps{
-                sh "pwd"
-                sh "cp /home/ec2-user/workspace/r/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
             }
         }
     }
