@@ -1,23 +1,27 @@
-pipeline{
-    agent{label "web3cpull"}
-    stages{
-        stage('clone/pull'){
-            steps{
+
+pipeline {
+    agent {label "slave2"}
+    stages {
+        stage ("clone") {
+            steps {
                 sh "pwd"
-                sh "git pull https://github.com/pramukhgowda/my-sample-website.git"
+                sh "ls"
+                sh "cd my-sample-website ; git pull https://github.com/samsambrama/my-sample-website.git"
+                sh "pwd"
+                
             }
         }
-        stage("maven"){
-            steps{
-                sh "pwd"
-                sh "mvn clean install"
-            }
+    stage ("build") {
+        steps {
+            sh "pwd"
+            sh "cd my-sample-website ; mvn clean install"
         }
-        stage("deploy"){
-            steps{
-                sh "pwd"
-                sh "cp /home/ec2-user/workspace/r/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
-            }
-        }
+    } 
+
+    stage ("deploy") {
+    steps {
+        sh "cp my-sample-website/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
+    }
+    }
     }
 }
