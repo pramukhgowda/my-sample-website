@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls"
-                sh "cd my-sample-website ; git pull https://github.com/samsambrama/my-sample-website.git"
+                 git url: 'https://github.com/samsambrama/my-sample-website.git'
                 
                 
             }
