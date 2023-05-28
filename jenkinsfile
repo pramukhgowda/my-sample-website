@@ -20,6 +20,7 @@ pipeline {
 
     stage ("deploy") {
     steps {
+    sh "pwd"
         sh "cp my-sample-website/webapp/target/webapp.war /home/ec2-user/apache-tomcat-8.0.15/webapps"
     }
     }
